@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../schema.json
+name: gentry
+chainId: 9090
+domainId: 9090
+protocol: ethereum
+rpcUrls:
+  - http: https://testnet.inco.org

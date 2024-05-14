@@ -1,0 +1,5 @@
+gentry:
+  threshold: 1
+  validators:
+    - "0x13B6eE5D6e02D1A9FBf3B56D9D2EAf57c5f43a04"
+
