@@ -12,7 +12,7 @@ interface Gateway {
     function getCipher(bytes32 _message) external view returns (bytes memory _meta);
 }
 
-contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
+contract MyCcipReadIsm is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
     using Message for bytes;
     IMailbox mailbox;
     string[] public offChainURLs;
@@ -36,7 +36,9 @@ contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
         bytes calldata _message
     ) external pure returns (bool) {
         // Decode the sender and committedHash from the message
-        (address sender, bytes32 committedHash) = abi.decode(_message, (address, bytes32));
+                require(_message.version() == 3, "Mailbox: bad version");
+        bytes memory message = _message.body();
+        (address sender, bytes32 committedHash) = abi.decode(message, (address, bytes32));
 
         // Hash the metadata
         bytes32 metadataHash = keccak256(_metadata);
