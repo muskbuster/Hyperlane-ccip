@@ -26,7 +26,8 @@ class CiphertextService {
 
   // Adjusted handler method to match expected signature
   async handler(args: ethers.utils.Result, req: RPCCall): Promise<Array<any>> {
-    const hash = args[1]; // Assuming the hash is the first argument
+    const hash = args[0]; // Assuming the hash is the first argument
+    console.log(`Fetching ciphertext for hash: ${hash}`);
     const ciphertext = await this.getCiphertext(hash);
     return [ciphertext];
   }
