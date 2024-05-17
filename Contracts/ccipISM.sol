@@ -14,10 +14,12 @@ interface Gateway {
 
 interface IMessageRecipient {
     function handleWithCiphertext(
+        uint32 _origin,
+        bytes32 _sender,
         bytes calldata _message
     ) external payable;
 }
-contract MyCcipReadIsm is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
+contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
     using Message for bytes;
     IMailbox mailbox;
     string[] public offChainURLs;
@@ -50,9 +52,8 @@ contract MyCcipReadIsm is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModul
         bytes memory Ciphertext= abi.encode(message,_metadata);
         // Check if the hashed metadata matches the committedHash
         if (metadataHash == committedHash) {
-            IMessageRecipient(recipient).handleWithCiphertext(Ciphertext);
+            IMessageRecipient(recipient).handleWithCiphertext(_message.origin(),_message.sender(),Ciphertext);
             return true;
-            
         } else {
             return false;
         }
@@ -81,7 +82,7 @@ contract MyCcipReadIsm is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModul
             address(this),
             offChainURLs,
             abi.encodeWithSelector(Gateway.getCipher.selector, committedHash),
-            MyCcipReadIsm.process.selector,
+            CipherCCIP.process.selector,
             _message
         );
     }

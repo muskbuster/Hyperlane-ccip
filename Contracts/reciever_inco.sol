@@ -12,12 +12,19 @@ contract CipherTextProcessor is OwnableUpgradeable{
         function setInterchainSecurityModule(address _module) public {
         interchainSecurityModule = IInterchainSecurityModule(_module);
     }
-    
+    event handled (address sender,bytes32 hash);
     address mailbox; // address of mailbox contract
-    mapping (bytes32=>bytes) public  ciphertext;
+    address public ISM;
+    struct CiphertextDetails{
+        uint32 origin;
+        bytes32 sender;
+        bytes ciphertext;
+    }
+    mapping(bytes32 => CiphertextDetails) public CiphertextTrack; 
 
     constructor(address _mailbox, address _interchainSecurityModule) {
         mailbox = _mailbox;
+        ISM=_interchainSecurityModule;
         setInterchainSecurityModule(_interchainSecurityModule);
         
     }
@@ -30,15 +37,31 @@ contract CipherTextProcessor is OwnableUpgradeable{
         );
         _;
     }
+        modifier onlyISM() {
+        require(
+            msg.sender == ISM,
+            "Only mailbox can call this function !!!"
+        );
+        _;
+    }
   function handle( uint32 _origin,
         bytes32 _sender,
         bytes memory _body)external onlyMailbox {
            (address sender, bytes32 committedHash)=  abi.decode(_body, (address, bytes32));
-        storCipherText(committedHash,"");
+           emit handled(sender, committedHash);
 
   }
-  function storCipherText(bytes32 _hash,bytes memory _ciphertext) internal 
-  {
-    ciphertext[_hash]=_ciphertext;
-  }
+  function handleWithCiphertext( uint32 _origin,
+        bytes32 _sender,
+        bytes calldata _message)external payable onlyISM{
+  (bytes memory message,bytes memory ciphertext)=abi.decode(_message,(bytes , bytes));
+   (address sender, bytes32 committedHash)=  abi.decode(message, (address, bytes32));
+   CiphertextDetails memory data = CiphertextDetails(
+    _origin,
+    _sender,
+    ciphertext
+   );
+   CiphertextTrack[committedHash]=data;
+        }
+
 }
