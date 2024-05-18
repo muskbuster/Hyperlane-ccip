@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { RPCCall } from '@chainlink/ccip-read-server';
 
 type CipherTextResult = {
-  _meta: string; // The actual ciphertext returned by the server
+  ciphertext: string; // The actual ciphertext returned by the server
 };
 
 class CiphertextService {
@@ -15,13 +15,14 @@ class CiphertextService {
 
   async getCiphertext(hash: string): Promise<string> {
     const url = `${this.baseUrl}/token?hash=${hash}`;
-    const response = await axios.get(url);
+    const response = await axios.get<CipherTextResult>(url);
 
     if (response.status !== 200) {
       throw new Error(`Error fetching ciphertext: ${response.statusText}`);
     }
 
-    return response.data.toString();
+    // Ensure that the returned ciphertext is a string
+    return response.data.ciphertext;
   }
 
   // Adjusted handler method to match expected signature

@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { CipherTextABI } from '../src/abis/CiphertextServiceAbi'; // Adjust the path as needed
 
 // Example hash input
-const exampleHash = "0x6c3bf3dccc39df78b946f2d49077e90fc88a90c7c3f06ab17244a9850d3dc85b";
+const exampleHash = "0x17a2b4dec50da45152d765c45dd7cf8c299c7731b188aab3a91904af76c18b8d";
 
 // Create an Interface object from the JSON-format ABI
 const iface = new ethers.utils.Interface(CipherTextABI);
