@@ -20,7 +20,7 @@
       "merkleTreeHook": "0x99Fb7B1E8Fa5Cd9FEA60E3960fa4d4f06675f9b9",
       "protocolFee": "0xbaa225BB147D42cDAf4c1aAF0ef00DaaB6e69D12",
       "testRecipient": "0x6E60639b3fE166347878DC5A4BC752D7bDa1Df99",
-      "mailbox": "0x012b60B239095e8986D801A8a87D5904b346bc5a",
+      "mailbox": "0xb2EF9249C4fDB9Eb4c105cE0C3AA47b33126A224",
       "proxyAdmin": "0x27C47AD0e15c1FB715B653613B3b92434c6ff12c",
       "validatorAnnounce": "0xEE39958B781c868a95e78f653B9ee9ABe8E62743",
       "interchainGasPaymaster": "0x0000000000000000000000000000000000000000",
@@ -55,13 +55,13 @@
       "protocol": "ethereum",
       "rpcUrls": [
         {
-          "http": "https://ethereum-sepolia.publicnode.com"
+          "http": "https://eth-sepolia.g.alchemy.com/v2/o4D6p25CnIxRBE9Ce1R6_gciUEpZbqw8"
         },
         {
-          "http": "https://ethereum-sepolia.blockpi.network/v1/rpc/public"
+          "http": "https://eth-sepolia.g.alchemy.com/v2/_kLN3iQw3X4UyrUnXPrFkNxbC9znyYAY"
         },
         {
-          "http": "https://rpc.sepolia.org"
+          "http": "https://eth-sepolia.g.alchemy.com/v2/79Tlik1NfzVh93MX3Yhm_DvrapFTP9bN"
         }
       ],
       "aggregationHook": "0xe3147d5618f5e2e100690B50ec923009a4cde14A",
@@ -87,7 +87,7 @@
       "validatorAnnounce": "0xE6105C59480a1B7DD3E4f28153aFdbE12F4CfCD9",
       "domainRoutingIsm": "0xa916986A5747D4687Cd49815F8B19D9bDc7bb4d2",
       "index": {
-        "from": 4517401
+        "from": 5929287
       }
     }
   },
