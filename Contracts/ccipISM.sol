@@ -43,18 +43,18 @@ contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
         bytes calldata _message
     ) external  returns (bool) {
         // Decode the sender and committedHash from the message
-        require(_message.version() == 3, "Mailbox: bad version");
         address recipient=_message.recipientAddress();
         bytes memory message = _message.body();
-        (address sender, bytes32 committedHash) = abi.decode(message, (address, bytes32));
+        (bytes32 committedHash) = abi.decode(message, (bytes32));
         // Hash the metadata
         bytes32 metadataHash = keccak256(_metadata);
         bytes memory Ciphertext= abi.encode(message,_metadata);
-        // Check if the hashed metadata matches the committedHash
-        if (metadataHash == committedHash) {
-            IMessageRecipient(recipient).handleWithCiphertext(_message.origin(),_message.sender(),Ciphertext);
-            return true;
-        } else {
+        require(metadataHash==committedHash,"invalid");
+        IMessageRecipient(recipient).handleWithCiphertext(_message.origin(),_message.sender(),Ciphertext);
+        if(metadataHash==committedHash){
+        return true;
+        }
+        else{
             return false;
         }
     }
@@ -75,9 +75,8 @@ contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
     function getOffchainVerifyInfo(
         bytes calldata _message
     ) external view override {
-        require(_message.version() == 3, "Mailbox: bad version");
         bytes memory message = _message.body();
-        (address sender, bytes32 committedHash) = abi.decode(message, (address, bytes32));
+        (bytes32 committedHash) = abi.decode(message, (bytes32));
         revert OffchainLookup(
             address(this),
             offChainURLs,

@@ -7,6 +7,7 @@ import {IInterchainSecurityModule} from "@hyperlane-xyz/core/contracts/interface
 import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
+
 contract CipherTextCommitment is OwnableUpgradeable{
      IPostDispatchHook public hook;
       address mailbox;
@@ -31,8 +32,8 @@ contract CipherTextCommitment is OwnableUpgradeable{
     function CommitCiphertextHash(bytes32 _hash) payable external
     {
         hash[_hash]=_hash;
-        uint256 quote = IMailbox(mailbox).quoteDispatch(DomainID,addressToBytes32(recipient),abi.encode(msg.sender,_hash));
-          IMailbox(mailbox).dispatch{value: quote}(DomainID,addressToBytes32(recipient),abi.encode(msg.sender,_hash));
+        uint256 quote = IMailbox(mailbox).quoteDispatch(DomainID,addressToBytes32(recipient),abi.encode(_hash));
+          IMailbox(mailbox).dispatch{value: quote}(DomainID,addressToBytes32(recipient),abi.encode(_hash));
     }
 
       function addressToBytes32(address _addr) internal pure returns (bytes32) {
