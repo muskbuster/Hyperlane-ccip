@@ -4,7 +4,7 @@ import { CiphertextService } from './services/CiphertextService';
 import * as config from './config';
 
 // Initialize Services
-const ciphertextService = new CiphertextService("https://redesigned-meme-p65gw4qjg65f64wr-3004.app.github.dev");
+const ciphertextService = new CiphertextService("https://3004-muskbuster-hyperlanecci-70mjnbls96p.ws-us114.gitpod.io");
 
 // Initialize Server and add Service handlers
 const server = new Server();
