@@ -18,7 +18,7 @@ contract CipherTextProcessor is OwnableUpgradeable{
     struct CiphertextDetails{
         uint32 origin;
         bytes32 sender;
-        bytes ciphertext;
+        bytes  ciphertext;
     }
     mapping(bytes32 => CiphertextDetails) public CiphertextTrack; 
 
@@ -53,7 +53,7 @@ contract CipherTextProcessor is OwnableUpgradeable{
   }
   function handleWithCiphertext( uint32 _origin,
         bytes32 _sender,
-        bytes calldata _message)external payable onlyISM{
+        bytes memory _message)external {
   (bytes memory message,bytes memory ciphertext)=abi.decode(_message,(bytes , bytes));
    (bytes32 committedHash)=  abi.decode(message, (bytes32));
    CiphertextDetails memory data = CiphertextDetails(
@@ -61,6 +61,7 @@ contract CipherTextProcessor is OwnableUpgradeable{
     _sender,
     ciphertext
    );
+   emit handled(committedHash);
    CiphertextTrack[committedHash]=data;
         }
 
