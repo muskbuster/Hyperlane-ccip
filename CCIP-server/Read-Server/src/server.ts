@@ -4,7 +4,7 @@ import { CiphertextService } from './services/CiphertextService';
 import * as config from './config';
 
 // Initialize Services
-const ciphertextService = new CiphertextService("https://3004-muskbuster-hyperlanecci-70mjnbls96p.ws-us114.gitpod.io");
+const ciphertextService = new CiphertextService("https://hyperlane-ccip.vercel.app");
 
 // Initialize Server and add Service handlers
 const server = new Server();
