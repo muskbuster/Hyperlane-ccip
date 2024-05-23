@@ -17,6 +17,7 @@ contract CipherTextCommitment is OwnableUpgradeable{
       function setHook(address _hook) public onlyOwner {
         hook = IPostDispatchHook(_hook);
     }
+    event hasher(bytes32 _hash);
  constructor(address _mailbox,address _recipient) {
         mailbox = _mailbox;
         recipient=_recipient;
@@ -29,11 +30,13 @@ contract CipherTextCommitment is OwnableUpgradeable{
         _;
     }
 
-    function CommitCiphertextHash(bytes32 _hash) payable external
+    function CommitCiphertextHash(bytes calldata Ciphertext) payable external
     {
+        bytes32 _hash = keccak256(Ciphertext);
         hash[_hash]=_hash;
-        uint256 quote = IMailbox(mailbox).quoteDispatch(DomainID,addressToBytes32(recipient),abi.encode(_hash));
+      uint256 quote = IMailbox(mailbox).quoteDispatch(DomainID,addressToBytes32(recipient),abi.encode(_hash));
           IMailbox(mailbox).dispatch{value: quote}(DomainID,addressToBytes32(recipient),abi.encode(_hash));
+       emit  hasher(_hash);
     }
 
       function addressToBytes32(address _addr) internal pure returns (bytes32) {
