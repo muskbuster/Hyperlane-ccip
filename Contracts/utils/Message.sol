@@ -17,6 +17,7 @@ library Message {
     uint256 private constant DESTINATION_OFFSET = 41;
     uint256 private constant RECIPIENT_OFFSET = 45;
     uint256 private constant BODY_OFFSET = 77;
+    uint256 private constant METADATA_OFFSET=64;
 
     /**
      * @notice Returns formatted (packed) Hyperlane message with provided fields
@@ -149,5 +150,10 @@ library Message {
         bytes calldata _message
     ) internal pure returns (bytes calldata) {
         return bytes(_message[BODY_OFFSET:]);
+    }
+        function metadata(
+        bytes calldata _message
+    ) internal pure returns (bytes calldata) {
+        return bytes(_message[METADATA_OFFSET:]);
     }
 }

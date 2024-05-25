@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 import {AbstractCcipReadIsm} from "@hyperlane-xyz/core/contracts/isms/ccip-read/AbstractCcipReadIsm.sol";
 import {IInterchainSecurityModule, ISpecifiesInterchainSecurityModule} from "@hyperlane-xyz/core/contracts/interfaces/IInterchainSecurityModule.sol";
 import {IMailbox} from "@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol";
-import {Message} from "@hyperlane-xyz/core/contracts/libs/Message.sol";
+import {Message} from "./utils/Message.sol";
 import {Indexed} from "Indexed.sol";
 import {TypeCasts} from "TypeCasts.sol";
 import {Versioned} from "Modifs/Versioned.sol";
@@ -20,7 +20,7 @@ contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
     using Message for bytes;
     IMailbox mailbox;
     string[] public offChainURLs;
-event sent(bytes message);
+event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes metadata);
     function setURL(string memory _urls) public  {
         delete offChainURLs;
         offChainURLs.push(_urls);
@@ -44,19 +44,27 @@ event sent(bytes message);
     bytes calldata _message
 ) external returns (bool) {
     // Call handleWithCiphertext on CipherTextProcessor
-    bytes memory encodedMessage = abi.encode( _message,_metadata);
+  //  bytes memory encodedMessage = abi.encode( _message,_metadata);
      address recipient=_message.recipientAddress();
      bytes memory message = _message.body();
      bytes32 committedHash = abi.decode(message, (bytes32));
-     bytes32 metadataHash = keccak256(_metadata);
-     bytes memory Ciphertext= abi.encode(message,_metadata);
+     bytes memory metadata = _metadata.metadata();
+     bytes32 metadataHash = keccak256(metadata);
+     bytes memory Ciphertext= abi.encode(message,metadata);
      require(metadataHash==committedHash,"invalid");
-    IMessageRecipient(recipient)
-        .handleWithCiphertext(_message.origin(),_message.sender(), Ciphertext);
+     IMessageRecipient(recipient)
+       .handleWithCiphertext(_message.origin(),_message.sender(), Ciphertext);
         
-    emit sent(encodedMessage);
+    emit sent(Ciphertext,committedHash,metadataHash,metadata);
     return metadataHash==committedHash;
 }
+
+// function decoder(bytes calldata meta) public view returns (bytes memory message){
+//     bytes memory data=meta.metadata();
+//     return data;
+// }
+
+
 
 
 
