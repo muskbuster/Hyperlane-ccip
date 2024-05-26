@@ -154,6 +154,7 @@ library Message {
         function metadata(
         bytes calldata _message
     ) internal pure returns (bytes calldata) {
-        return bytes(_message[METADATA_OFFSET:]);
+        uint256 nulloffset=_message.length-4;
+        return bytes(_message[METADATA_OFFSET:nulloffset]);
     }
 }

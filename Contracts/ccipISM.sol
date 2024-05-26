@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 import {AbstractCcipReadIsm} from "@hyperlane-xyz/core/contracts/isms/ccip-read/AbstractCcipReadIsm.sol";
 import {IInterchainSecurityModule, ISpecifiesInterchainSecurityModule} from "@hyperlane-xyz/core/contracts/interfaces/IInterchainSecurityModule.sol";
 import {IMailbox} from "@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol";
-import {Message} from "./utils/Message.sol";
+import {Message} from "@hyperlane-xyz/core/contracts/libs/Message.sol";
 import {Indexed} from "Indexed.sol";
 import {TypeCasts} from "TypeCasts.sol";
 import {Versioned} from "Modifs/Versioned.sol";
@@ -59,11 +59,15 @@ event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes meta
     return metadataHash==committedHash;
 }
 
-// function decoder(bytes calldata meta) public view returns (bytes memory message){
-//     bytes memory data=meta.metadata();
-//     return data;
-// }
 
+
+// function decoder(bytes calldata meta,bytes calldata _message) public view returns (bytes memory message,bytes32 calculatedhash,bytes32 comittedhash){
+//     bytes memory data=meta.metadata();
+//      bytes memory message = _message.body();
+//      bytes32 committedHash = abi.decode(message, (bytes32));
+//      bytes32 metadataHash = keccak256(data);
+//     return (data, metadataHash, committedHash);
+// }
 
 
 

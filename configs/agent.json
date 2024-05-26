@@ -25,7 +25,7 @@
       "validatorAnnounce": "0xEE39958B781c868a95e78f653B9ee9ABe8E62743",
       "interchainGasPaymaster": "0x0000000000000000000000000000000000000000",
       "index": {
-        "from": 1487709
+        "from": 1676038
       }
     },
     "sepolia": {
@@ -87,7 +87,7 @@
       "validatorAnnounce": "0xE6105C59480a1B7DD3E4f28153aFdbE12F4CfCD9",
       "domainRoutingIsm": "0xa916986A5747D4687Cd49815F8B19D9bDc7bb4d2",
       "index": {
-        "from": 5929287
+        "from": 5979743
       }
     }
   },
