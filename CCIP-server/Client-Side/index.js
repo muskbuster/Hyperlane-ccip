@@ -4,6 +4,7 @@ const cors = require("cors");
 const ethers = require("ethers");
 const db = require("./db");
 const DBStore = require("./schema");
+const dotenv = require('dotenv')
 
 const app = express();
 db();
