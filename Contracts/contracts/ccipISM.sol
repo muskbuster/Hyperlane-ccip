@@ -3,10 +3,10 @@ pragma solidity ^0.8.13;
 import {AbstractCcipReadIsm} from "@hyperlane-xyz/core/contracts/isms/ccip-read/AbstractCcipReadIsm.sol";
 import {IInterchainSecurityModule, ISpecifiesInterchainSecurityModule} from "@hyperlane-xyz/core/contracts/interfaces/IInterchainSecurityModule.sol";
 import {IMailbox} from "@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol";
-import {Message} from "Contracts/utils/Message.sol";
-import {Indexed} from "Contracts/utils/Indexed.sol";
-import {TypeCasts} from "Contracts/utils/TypeCasts.sol";
-import {Versioned} from "Contracts/utils/Versioned.sol";
+import {Message} from "Contracts/contracts/utils/Message.sol";
+import {Indexed} from "Contracts/contracts/utils/Indexed.sol";
+import {TypeCasts} from "Contracts/contracts/utils/TypeCasts.sol";
+import {Versioned} from "Contracts/contracts/utils/Versioned.sol";
 
 
 interface Gateway {

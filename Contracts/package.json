@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@hyperlane-xyz/core": "^3.12.2",
+    "@openzeppelin/contracts": "^4.9.3",
+    "hardhat": "^2.22.4"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0"
+  }
+}
