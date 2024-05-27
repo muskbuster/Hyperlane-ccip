@@ -3,10 +3,11 @@ pragma solidity ^0.8.13;
 import {AbstractCcipReadIsm} from "@hyperlane-xyz/core/contracts/isms/ccip-read/AbstractCcipReadIsm.sol";
 import {IInterchainSecurityModule, ISpecifiesInterchainSecurityModule} from "@hyperlane-xyz/core/contracts/interfaces/IInterchainSecurityModule.sol";
 import {IMailbox} from "@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol";
-import {Message} from "@hyperlane-xyz/core/contracts/libs/Message.sol";
-import {Indexed} from "Indexed.sol";
-import {TypeCasts} from "TypeCasts.sol";
-import {Versioned} from "Modifs/Versioned.sol";
+import {Message} from "Contracts/utils/Message.sol";
+import {Indexed} from "Contracts/utils/Indexed.sol";
+import {TypeCasts} from "Contracts/utils/TypeCasts.sol";
+import {Versioned} from "Contracts/utils/Versioned.sol";
+
 
 interface Gateway {
     function getCipher(bytes32 _message) external view returns (bytes memory _meta);
@@ -47,7 +48,7 @@ event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes meta
   //  bytes memory encodedMessage = abi.encode( _message,_metadata);
      address recipient=_message.recipientAddress();
      bytes memory message = _message.body();
-     bytes32 committedHash = abi.decode(message, (bytes32));
+     (bytes32 committedHash,) = abi.decode(message,(bytes32,bytes));
      bytes memory metadata = _metadata.metadata();
      bytes32 metadataHash = keccak256(metadata);
      bytes memory Ciphertext= abi.encode(message,metadata);
