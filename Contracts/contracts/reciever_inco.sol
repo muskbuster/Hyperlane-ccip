@@ -53,7 +53,7 @@ contract CipherTextProcessor is OwnableUpgradeable{
   }
   function handleWithCiphertext( uint32 _origin,
         bytes32 _sender,
-        bytes memory _message)external {
+        bytes memory _message)external onlyISM {
   (bytes memory message,bytes memory ciphertext)=abi.decode(_message,(bytes , bytes));
    (bytes32 committedHash)=  abi.decode(message, (bytes32));
    CiphertextDetails memory data = CiphertextDetails(
