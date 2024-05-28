@@ -28,6 +28,7 @@ function prompt(question) {
   const readlineSync = require('readline-sync');
   return readlineSync.question(question);
 }
+}
 
 main().catch((error) => {
   console.error(error);

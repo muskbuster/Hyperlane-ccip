@@ -1,13 +1,8 @@
-# Sample Hardhat Project
+# Deployment 
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+step 1 - cd to '/Hyperlane-ccip/Contracts'
+step 2 - install dependencies `npm i`
+step 3 - input private key in hardhat config
+step 4 - run `npx hardhat run scripts/deploy.js --network inco` 
+step 5 - input the mailbox address and CCIP-ISM upon prompt(addresses are available in gitbook doc)
+step 6 - Uncomment the deployment code for sepolia and run `npx hardhat run scripts/deploy.js --network sepolia`
