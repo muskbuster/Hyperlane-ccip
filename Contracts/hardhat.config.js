@@ -11,56 +11,56 @@ module.exports = {
     hardhat: {
       accounts: [
         {
-          privateKey: "",
+          privateKey: "a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d",
           balance: "1000000000000000000000",
         },
       ],
     },
     inco: {
       url: "https://testnet.inco.org",
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     sepolia: {
       url: "https://eth-sepolia.g.alchemy.com/v2/o4D6p25CnIxRBE9Ce1R6_gciUEpZbqw8",
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     scrollSepolia: {
       url: "https://rpc.ankr.com/scroll_sepolia_testnet/13fd36280e38d43b0fc607f927263939f76ae47400cb4df9862c2210b93f131c",
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     neonEVMtestnet: {
       url: "https://proxy.devnet.neonlabs.org/solana",
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     basetestnet: {
       url: "https://rpc.ankr.com/base_goerli/13fd36280e38d43b0fc607f927263939f76ae47400cb4df9862c2210b93f131c"
 ,
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     arbitrumtestnet: {
       url: "https://sepolia-rollup.arbitrum.io/rpc"
 ,
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     lineatestnet: {
       url: "https://rpc.goerli.linea.build"
 ,
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     zkSynctestnet: {
       url: "https://testnet.era.zksync.dev"
 ,
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     mantletestnet: {
       url: "https://rpc.testnet.mantle.xyz"
 ,
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
     celotestnet: {
       url: "https://alfajores-forno.celo-testnet.org"
 ,
-      accounts: [""],
+      accounts: ["a05cb6cdca3da9f489e95621880c6de13daef23ab6d42cf18e3fbbc7eef24a1d"],
     },
   },
 };

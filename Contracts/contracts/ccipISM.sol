@@ -8,7 +8,6 @@ import {Indexed} from "Contracts/contracts/utils/Indexed.sol";
 import {TypeCasts} from "Contracts/contracts/utils/TypeCasts.sol";
 import {Versioned} from "Contracts/contracts/utils/Versioned.sol";
 
-
 interface Gateway {
     function getCipher(bytes32 _message) external view returns (bytes memory _meta);
 }
@@ -48,7 +47,7 @@ event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes meta
   //  bytes memory encodedMessage = abi.encode( _message,_metadata);
      address recipient=_message.recipientAddress();
      bytes memory message = _message.body();
-     (bytes32 committedHash,) = abi.decode(message,(bytes32,bytes));
+     bytes32 committedHash = abi.decode(message, (bytes32));
      bytes memory metadata = _metadata.metadata();
      bytes32 metadataHash = keccak256(metadata);
      bytes memory Ciphertext= abi.encode(message,metadata);
