@@ -22,7 +22,7 @@ contract CiphertextRoutingIsm is AbstractRoutingIsm {
         bytes calldata _message
     ) public view override returns (IInterchainSecurityModule) {
         bytes memory message = _message.body();
-     (bytes32 committedHash,uint8 msgtype) = abi.decode(message, (bytes32,uint8));
+     (uint8 msgtype) = abi.decode(message, (uint8));
      address ISM;
      if (msgtype==0)
      {

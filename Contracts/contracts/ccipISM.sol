@@ -21,7 +21,7 @@ contract CipherCCIP is AbstractCcipReadIsm, ISpecifiesInterchainSecurityModule {
     IMailbox mailbox;
     string[] public offChainURLs;
 event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes metadata);
-    function setURL(string memory _urls) public  {
+    function setURL(string memory _urls) internal  {
         delete offChainURLs;
         offChainURLs.push(_urls);
     }
@@ -47,7 +47,7 @@ event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes meta
   //  bytes memory encodedMessage = abi.encode( _message,_metadata);
      address recipient=_message.recipientAddress();
      bytes memory message = _message.body();
-     bytes32 committedHash = abi.decode(message, (bytes32));
+     (,bytes32 committedHash) = abi.decode(message, (uint8,bytes32));
      bytes memory metadata = _metadata.metadata();
      bytes32 metadataHash = keccak256(metadata);
      bytes memory Ciphertext= abi.encode(message,metadata);
@@ -61,12 +61,12 @@ event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes meta
 
 
 
-// function decoder(bytes calldata meta,bytes calldata _message) public view returns (bytes memory message,bytes32 calculatedhash,bytes32 comittedhash){
+// function decoder(bytes calldata meta,bytes calldata _message) public view returns (bytes memory message,bytes memory arb,bytes32 calculatedhash,bytes32 comittedhash,bytes memory metad){
 //     bytes memory data=meta.metadata();
 //      bytes memory message = _message.body();
-//      bytes32 committedHash = abi.decode(message, (bytes32));
+//      (bytes32 committedHash,bytes memory arbitrary) = abi.decode(message, (bytes32,bytes));
 //      bytes32 metadataHash = keccak256(data);
-//     return (data, metadataHash, committedHash);
+//     return (message,arbitrary, metadataHash, committedHash,data);
 // }
 
 
@@ -86,7 +86,7 @@ event sent(bytes message,bytes32 committedhash,bytes32 calculatedhash,bytes meta
         bytes calldata _message
     ) external view override {
         bytes memory message = _message.body();
-        (bytes32 committedHash) = abi.decode(message, (bytes32));
+        (,bytes32 committedHash) = abi.decode(message,(uint8, bytes32));
         revert OffchainLookup(
             address(this),
             offChainURLs,
